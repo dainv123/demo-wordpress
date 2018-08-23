@@ -1,10 +1,15 @@
 <?php
+/**
+ * My function 
+ */
 class Custom_Menu_Top_Walker extends Walker_Nav_Menu {
     function start_lvl( &$output, $depth = 0, $args = array() ) {
         $indent = ( $depth > 0  ? str_repeat( "\t", $depth ) : '' ); // code indent
-        $display_depth = ( $depth + 1); // because it counts the first submenu as 0
+		$display_depth = ( $depth + 1); // because it counts the first submenu as 0
+		// var_dump($depth);
+
         $classes = array(
-            'dropdown-menu'
+			( $depth == -1 ? '' : 'dropdown-menu' ),
         );
         $class_names = implode( ' ', $classes );
  
@@ -14,19 +19,17 @@ class Custom_Menu_Top_Walker extends Walker_Nav_Menu {
  
     function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
         global $wp_query;
-        $indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); // code indent
- 
-        // Depth-dependent classes.
+		$indent = ( $depth > 0 ? str_repeat( "\t", $depth ) : '' ); 
         $depth_classes = array(
-            ( $depth == 0 ? 'main-menu-item' : 'sub-menu-item' ),
-            ( $depth >=2 ? 'sub-sub-menu-item' : '' ),
-            ( $depth % 2 ? 'menu-item-odd' : 'menu-item-even' ),
-            'menu-item-depth-' . $depth
+			( $args->walker->has_children && $depth == 0 ? 'has-dropdown' : '' ),
+			( $args->walker->has_children && $depth > 0 ? 'dropdown-submenu' : '' ),
+			( $item->current || $item->current_item_ancestor || $item->current_item_parent  ? 'active' : '' ),
         );
         $depth_class_names = esc_attr( implode( ' ', $depth_classes ) );
  
         // Passed classes.
-        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+		// $class_names = in_array("current_page_item",$item->classes) ? ' active' : '';
         $class_names = esc_attr( implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item ) ) );
  
         // Build HTML.
@@ -37,8 +40,8 @@ class Custom_Menu_Top_Walker extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-		
-        $attributes .= ' class="' . ( $depth > 0 ? 'sub-menu-link' : 'main-menu-link' ) . '"';
+
+        $attributes .= ' data-toggle="' . ( $args->walker->has_children ? 'dropdown' : '' ) . '" class="' . ( $args->walker->has_children ? 'dropdown-toggle' : '' ) . '"';
  
         // Build HTML output and pass through the proper filter.
         $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s',
@@ -51,7 +54,70 @@ class Custom_Menu_Top_Walker extends Walker_Nav_Menu {
         );
         $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
     }
-  }
+}
+
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page(array(
+		'page_title' 	=> 'Theme General Settings',
+		'menu_title'	=> 'Cấu hình chung',
+		'menu_slug' 	=> 'theme-general-settings',
+		'capability'	=> 'edit_posts',
+		'redirect'		=> false
+	));
+}
+
+function custom_menu_top( $name ) {
+	if (($name) && wp_get_nav_menu_items($name)) {
+		$menu_items = wp_get_nav_menu_items($name);
+		foreach( $menu_items as $menu_item ) {
+			if( $menu_item->menu_item_parent == 0 ) {
+					
+				$parent = $menu_item->ID;
+					
+				$menu_array = array();
+				foreach( $menu_items as $submenu ) {
+					if( $submenu->menu_item_parent == $parent ) {
+						$bool = true;
+						$menu_array[] = '<li><a href="' . $submenu->url . '">' . $submenu->title . '</a></li>' ."\n";
+					}
+				}
+				if( $bool == true && count( $menu_array ) > 0 ) {
+						
+					$menu_list .= '<div class="col-xs-12 col-sm-6 col-md-2 footer-widget-link">' ."\n";
+					$menu_list .= '<div class="footer-widget-title">
+					<h5>' . $menu_item->title . '</h5></div>' ."\n";
+						
+					$menu_list .= '<div class="footer-widget-content"><ul class="list-unstyled">' ."\n";
+					$menu_list .= implode( "\n", $menu_array );
+					$menu_list .= '</ul></div></div>' ."\n";
+						
+				} else {
+						
+					$menu_list .= '<div class="col-xs-12 col-sm-6 col-md-2 footer-widget-link">' ."\n";
+					$menu_list .= '<div class="footer-widget-title">';
+					$menu_list .= '<h5>' . $menu_item->title . '</h5></div></div>' ."\n";
+				}
+			}
+		}
+	}
+	else {
+		$menu_list = '<!-- no menu defined -->';
+	}
+	echo $menu_list;
+}
+
+function custom_menu_bottom( $name ) {
+	if (($name) && wp_get_nav_menu_items($name)) {
+		$menu_items = wp_get_nav_menu_items($name);
+		foreach( $menu_items as $menu_item ) {
+			$menu_list .= '<li><a href="' . $menu_item->url . '">' . $menu_item->title . '</a></li>' ."\n";
+		}
+	}
+	else {
+		$menu_list = '<!-- no menu defined -->';
+	}
+	echo $menu_list;
+}
 
 /**
  * Twenty Seventeen functions and definitions

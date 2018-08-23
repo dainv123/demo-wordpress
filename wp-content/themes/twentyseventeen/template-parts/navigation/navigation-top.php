@@ -20,13 +20,16 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="logo" href="index.html">
-				<img src="assets/images/logo/logo-light.png" alt="Autoshop">
+				<img src="<?php echo get_template_directory_uri(); ?>/assets_tpt/images/logo/logo-light.png" alt="Autoshop">
 			</a>
 		</div>
 		<div class="collapse navbar-collapse pull-right" id="header-navbar-collapse-1">
 			<?php wp_nav_menu( array(
 				'theme_location' => 'top',
-				'menu_id'        => 'top-menu',
+				// 'menu' => 'main',
+				'container'=> false, 
+				'menu_id'=> false, 
+				'menu_class'	 => 'nav navbar-nav navbar-left',
 				'walker' => new Custom_Menu_Top_Walker()
 			)); ?>
 			<!-- Mod-->
@@ -61,7 +64,7 @@
 					<div class="cart-overview">
 						<ul class="list-unstyled">
 							<li>
-								<img class="img-responsive" src="assets/images/shop/thumb/1.jpg" alt="product" />
+								<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets_tpt/images/shop/thumb/1.jpg" alt="product" />
 								<div class="product-meta">
 									<h5 class="product-title">Belt Car Engine</h5>
 									<p class="product-price">Price: $68.00 </p>
@@ -70,7 +73,7 @@
 								<a class="cancel" href="#">cancel</a>
 							</li>
 							<li>
-								<img class="img-responsive" src="assets/images/shop/thumb/2.jpg" alt="product" />
+								<img class="img-responsive" src="<?php echo get_template_directory_uri(); ?>/assets_tpt/images/shop/thumb/2.jpg" alt="product" />
 								<div class="product-meta">
 									<h5 class="product-title">OIL FILTER</h5>
 									<p class="product-price">Price: $180.00 </p>

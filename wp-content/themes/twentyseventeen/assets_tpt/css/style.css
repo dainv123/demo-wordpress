@@ -6578,3 +6578,17 @@ footer {
 .client-carousel img {
 	display: inline-block;
 }
+
+/* custom contact form 7 */
+.wpcf7 .screen-reader-response, .wpcf7-response-output.wpcf7-validation-errors {
+    display: none;
+}
+.wpcf7 span.wpcf7-not-valid-tip {
+    position: absolute;
+    bottom: 12px;
+    font-size: 12px;
+    color: #d22e2e;
+}
+.wpcf7 form {
+	margin-bottom: 0;
+}

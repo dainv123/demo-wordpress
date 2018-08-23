@@ -11,37 +11,29 @@
  * @since 1.0
  * @version 1.2
  */
-
 ?>
-
-		</div><!-- #content -->
-
-		<footer id="colophon" class="site-footer" role="contentinfo">
-			<div class="wrap">
-				<?php
-				get_template_part( 'template-parts/footer/footer', 'widgets' );
-
-				if ( has_nav_menu( 'social' ) ) : ?>
-					<nav class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentyseventeen' ); ?>">
-						<?php
-							wp_nav_menu( array(
-								'theme_location' => 'social',
-								'menu_class'     => 'social-links-menu',
-								'depth'          => 1,
-								'link_before'    => '<span class="screen-reader-text">',
-								'link_after'     => '</span>' . twentyseventeen_get_svg( array( 'icon' => 'chain' ) ),
-							) );
-						?>
-					</nav><!-- .social-navigation -->
-				<?php endif;
-
-				get_template_part( 'template-parts/footer/site', 'info' );
-				?>
-			</div><!-- .wrap -->
-		</footer><!-- #colophon -->
-	</div><!-- .site-content-contain -->
-</div><!-- #page -->
-<?php wp_footer(); ?>
-
+		<footer id="footer" class="footer footer-1">
+			<?php get_template_part( 'template-parts/footer/footer'); ?>
+		</footer>
+	</div>
+	<script src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/jquery-2.2.4.min.js"></script>
+	<script src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/plugins.js"></script>
+	<script src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/functions.js"></script>
+	<!-- file js lien-he -->
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCiRALrXFl5vovX0hAkccXXBFh7zP8AOW8"></script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/plugins/jquery.gmap.min.js"></script>
+	<script type="text/javascript">
+		$('#googleMap').gMap({
+			address: "<?php the_field('dia_chi', 'option'); ?>",
+			zoom: 15,
+			markers: [
+				{
+					address: "<?php the_field('dia_chi', 'option'); ?>",
+					maptype: 'ROADMAP',
+				}
+			]
+		});
+	</script>
+	<!-- end file js lien-he -->
 </body>
 </html>
