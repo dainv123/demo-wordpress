@@ -13,6 +13,7 @@
     <div class="container">
         <div class="row">
             <?php 
+                if(get_field('dich_vu', 'option'))
                 foreach ( get_field('dich_vu', 'option') as $name => $value ) {
             ?>
             <div class="col-xs-12 col-sm-6 col-md-3">
@@ -40,7 +41,9 @@
                 </div>
                 <div class="footer-widget-content">
                     <p><?php the_field('mieu_ta', 'option') ?></p>
-                    <?php foreach ( get_field('urls', 'option') as $name => $value ) { ?>
+                    <?php 
+                    if(get_field('urls', 'option'))
+                    foreach ( get_field('urls', 'option') as $name => $value ) { ?>
                         <div class="footer-social">
                             <a class="share-facebook" href="<?php echo $value['facebook'] ?>">
                                 <i class="fa fa-facebook"></i>

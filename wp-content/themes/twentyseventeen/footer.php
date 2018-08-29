@@ -18,6 +18,7 @@
 	</div>
 	<script src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/jquery-2.2.4.min.js"></script>
 	<script src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/plugins.js"></script>
+	<script src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/page.js"></script>
 	<script src="<?php echo get_template_directory_uri(); ?>/assets_tpt/js/functions.js"></script>
 	<!-- file js lien-he -->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCiRALrXFl5vovX0hAkccXXBFh7zP8AOW8"></script>

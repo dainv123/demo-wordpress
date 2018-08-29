@@ -24,17 +24,6 @@
 				<ul class="list-inline pull-right top-links">
 					<li>
 						<a href="#">Login</a>
-						/
-						<a href="#">Register</a>
-					</li>
-					<li>
-						<a href="#">Wishlist</a>
-					</li>
-					<li>
-						<a href="#">Checkout</a>
-					</li>
-					<li>
-						<a href="#">Stores</a>
 					</li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English

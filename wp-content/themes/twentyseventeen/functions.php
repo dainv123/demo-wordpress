@@ -119,6 +119,129 @@ function custom_menu_bottom( $name ) {
 	echo $menu_list;
 }
 
+function replace_admin_menu_icons_css() {
+    ?>
+    <style>
+        #adminmenu #menu-posts-tin_tuc div.wp-menu-image::before,
+		#adminmenu #menu-posts-san_pham div.wp-menu-image::before {
+			content: '\f105';
+		}
+    </style>
+    <?php
+}
+
+add_action( 'admin_head', 'replace_admin_menu_icons_css' );
+
+function getPostViews($postID){
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+        return "0";
+    }
+    return $count.'';
+}
+
+function limitText( $content, $length ) {
+    $drop = explode( ' ', $content );
+    $total = 0;
+    foreach ( $drop as $key => $drops ) {
+        $total += strlen( $drops ) + 1;
+        echo $drops . ' ';
+        if ( $total > $length ) {
+            echo '...';
+            break;
+        }
+    }
+}
+
+// function to count views.
+function setPostViews($postID) {
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    }else{
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+
+add_action( 'wp_ajax_post_pagination', 'pagination_ajax' );
+add_action( 'wp_ajax_nopriv_post_pagination', 'pagination_ajax' );
+
+function pagination_ajax(){
+	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+
+	$the_query = new WP_Query( array(
+		'post_type' => 'san_pham',
+		'posts_per_page' => 3,
+		'paged' => $paged
+	)); 
+
+	if ( $the_query->have_posts() ) : 
+		echo '<div class="row show-product">';
+			while ( $the_query->have_posts() ) : $the_query->the_post(); 
+			?>
+				<div class="col-xs-12 col-sm-6 col-md-4 product">
+					<div class="product-img">
+					<img src="<?php echo wp_get_attachment_url(get_post_thumbnail_id($post->ID)) ?>" alt="<?php the_title() ?>"/>
+						<div class="product-hover">
+							<div class="product-action">
+							<a class="btn btn-primary" href="<?php echo get_field('thong_tin_san_pham', $post->ID)[0]['lien_ket'] ?>">Mua ngay</a>
+							<a class="btn btn-primary" href="<?php echo get_post_permalink($post->ID) ?>">Xem chi tiết</a>
+							</div>
+						</div>
+						<!-- .product-overlay end -->
+					</div>
+					<!-- .product-img end -->
+					<div class="product-bio">
+						<div class="prodcut-cat">
+							<a href="javascript:void(0)"><?php echo get_field('thong_tin_san_pham', $post->ID)[0]['thuong_hieu'] ?></a>
+						</div>
+						<!-- .product-cat end -->
+						<div class="prodcut-title">
+							<h3>
+								<a href="<?php echo get_post_permalink($post->ID) ?>"><?php the_title() ?></a>
+							</h3>
+						</div>
+						<!-- .product-title end -->
+						<div class="product-price">
+							<span><?php echo get_field('thong_tin_san_pham', $post->ID)[0]['gia_moi'] ?></span>
+						</div>
+						<!-- .product-price end -->
+
+					</div>
+					<!-- .product-bio end -->
+				</div>
+			<?php
+			endwhile;
+				wp_reset_postdata();
+		echo '</div>'; 
+		echo '<div class="row"><div class="col-xs-12 col-sm-12 col-md-12">';
+			echo paginate_links( array(
+				// 'base'         => str_replace( 999999999, '%#%', ( get_pagenum_link( 999999999 ) ) ),
+				'total'        => $the_query->max_num_pages,
+				'current'      => max( 1, $paged ),
+				'format'       => '?paged=%#%',
+				'type'         => 'list',
+				// 'end_size'     => 2,
+				// 'mid_size'     => 1,
+				'prev_next'    => true,
+				'prev_text'    => sprintf( '<i>%1$s</i>', __( '<i class="fa fa-angle-left"></i>', 'text-domain' ) ),
+				'next_text'    => sprintf( '<i>%1$s</i>', __( '<i class="fa fa-angle-right"></i>', 'text-domain' ) ),
+			) );
+		echo '</div></div>'; 
+	else : 
+		echo '<p>Không tìm thấy sản phẩm nào</p>';
+	endif;
+
+	
+}
+
 /**
  * Twenty Seventeen functions and definitions
  *

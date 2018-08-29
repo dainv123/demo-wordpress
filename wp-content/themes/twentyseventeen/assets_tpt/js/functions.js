@@ -17,23 +17,23 @@
 	14. Hero Slider
 
 */
-(function($) {
+(function ($) {
     "use strict";
 
     /* ------------------  mobile menu ------------------ */
 
     var $dropToggle = $("ul.dropdown-menu [data-toggle=dropdown]"),
         $module = $(".module");
-    $dropToggle.on("click", function(event) {
+    $dropToggle.on("click", function (event) {
         event.preventDefault();
         event.stopPropagation();
         $(this).parent().siblings().removeClass("open");
         $(this).parent().toggleClass("open");
     });
-    $module.click(function() {
+    $module.click(function () {
         $(this).toggleClass("toggle-module");
     });
-    $module.find("input.form-control", ".btn", ".cancel").click(function(e) {
+    $module.find("input.form-control", ".btn", ".cancel").click(function (e) {
         e.stopPropagation();
     });
 
@@ -52,7 +52,7 @@
     var $bgPattern = $(".bg-pattern");
     var $colBg = $(".col-bg");
 
-    $bgSection.each(function() {
+    $bgSection.each(function () {
         var bgSrc = $(this).children("img").attr("src");
         var bgUrl = 'url(' + bgSrc + ')';
         $(this).parent().css("backgroundImage", bgUrl);
@@ -60,7 +60,7 @@
         $(this).remove();
     });
 
-    $bgPattern.each(function() {
+    $bgPattern.each(function () {
         var bgSrc = $(this).children("img").attr("src");
         var bgUrl = 'url(' + bgSrc + ')';
         $(this).parent().css("backgroundImage", bgUrl);
@@ -68,7 +68,7 @@
         $(this).remove();
     });
 
-    $colBg.each(function() {
+    $colBg.each(function () {
         var bgSrc = $(this).children("img").attr("src");
         var bgUrl = 'url(' + bgSrc + ')';
         $(this).parent().css("backgroundImage", bgUrl);
@@ -169,12 +169,12 @@
     var flickrID = '52617155@N08'; // Your Flickr Account Id Here
     var $flikrDiv = $('#flickr-feed');
     $flikrDiv.jflickrfeed({
-        limit: 10,
-        qstrings: {
-            id: flickrID
-        },
-        itemTemplate: '<a class="flickr-item" href="{{image}}" title="{{title}}"><img src="{{image_s}}" alt="{{title}}" /></a>'
-    }, function(data) {
+        // limit: 10,
+        // qstrings: {
+        //     id: flickrID
+        // },
+        // itemTemplate: '<a class="flickr-item" href="{{image}}" title="{{title}}"><img src="{{image_s}}" alt="{{title}}" /></a>'
+    }, function (data) {
         $('.flickr-item').magnificPopup({
             type: 'image',
             gallery: {
@@ -196,28 +196,28 @@
         slidesToScroll: 3,
         arrows: false,
         responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
             }
+        },
+        {
+            breakpoint: 991,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
         ]
     });
 
@@ -230,7 +230,7 @@
         min: 0,
         max: 500,
         values: [50, 300],
-        slide: function(event, ui) {
+        slide: function (event, ui) {
             $sliderAmount.val("$" + ui.values[0] + " - $" + ui.values[1]);
         }
     });
@@ -283,35 +283,35 @@
         variableWidth: false,
         arrows: false,
         responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                infinite: true,
+                dots: true
             }
+        },
+        {
+            breakpoint: 991,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
         ]
     });
 
@@ -327,35 +327,35 @@
         variableWidth: false,
         arrows: false,
         responsive: [{
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 6,
-                    slidesToScroll: 6,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 991,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3
-                }
-            },
-            {
-                breakpoint: 800,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 6,
+                slidesToScroll: 6,
+                infinite: true,
+                dots: true
             }
+        },
+        {
+            breakpoint: 991,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3
+            }
+        },
+        {
+            breakpoint: 800,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
         ]
     });
 
