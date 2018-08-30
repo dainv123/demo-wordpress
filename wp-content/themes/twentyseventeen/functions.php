@@ -41,7 +41,9 @@ class Custom_Menu_Top_Walker extends Walker_Nav_Menu {
         $attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 		$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
 
-        $attributes .= ' data-toggle="' . ( $args->walker->has_children ? 'dropdown' : '' ) . '" class="' . ( $args->walker->has_children ? 'dropdown-toggle' : '' ) . '"';
+		// link parent not click 
+		// $attributes .= ' data-toggle="' . ( $args->walker->has_children ? 'dropdown' : '' ) . '" class="' . ( $args->walker->has_children ? 'dropdown-toggle' : '' ) . '"';
+        $attributes .= '" class="' . ( $args->walker->has_children ? 'dropdown-toggle' : '' ) . '"';
  
         // Build HTML output and pass through the proper filter.
         $item_output = sprintf( '%1$s<a%2$s>%3$s%4$s%5$s</a>%6$s',
@@ -170,18 +172,54 @@ function setPostViews($postID) {
     }
 }
 
-add_action( 'wp_ajax_post_pagination', 'pagination_ajax' );
-add_action( 'wp_ajax_nopriv_post_pagination', 'pagination_ajax' );
+function pagination_san_pham(){
+	// Sét dk lọc, lấy bài viết theo category sản phẩm
+	$tax_query = '';
+	$category = get_queried_object();
+	if($category->post_parent !== 0)
+	$tax_query =  array(
+		array(
+			'taxonomy' => 'category',
+			'field' => 'slug',
+			'terms' => $category->post_name
+		)
+	);
 
-function pagination_ajax(){
+	// Sắp xếp theo ...
+	$s_order = array();
+	if (isset($_GET['orderby']) && isset($_GET['order']) && $_GET['orderby'] == "title")
+	{
+		$s_order = array(
+			'orderby' => 'title',
+			'order' => $_GET['order']
+		);
+	}
+	
+	// Đoạn 3
+	// if (isset($_GET['orderby']) && isset($_GET['order']) && $_GET['orderby'] == "gia_moi")
+	// {
+	// 	$s_order = array(
+	// 		'meta_key' => 'gia_moi',
+	// 		'orderby' => 'meta_value',
+	// 		'order' => $_GET['order'],
+	// 	);
+	// }
+
+	// Sét số lượng bài viết trên 1 page
 	$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
-	$the_query = new WP_Query( array(
+	// Thực hiện lấy
+	$args =  array(
 		'post_type' => 'san_pham',
-		'posts_per_page' => 3,
-		'paged' => $paged
-	)); 
+		'posts_per_page' => 2,
+		'paged' => $paged,
+		'tax_query' => $tax_query,
+		'order' => 'desc'
+	);
+	$args = array_merge($args, $s_order);
+	$the_query = new WP_Query($args); 
 
+	// Xuất ra html
 	if ( $the_query->have_posts() ) : 
 		echo '<div class="row show-product">';
 			while ( $the_query->have_posts() ) : $the_query->the_post(); 
@@ -242,6 +280,36 @@ function pagination_ajax(){
 	
 }
 
+add_action( 'pre_get_posts', 'se39294_search_pre_get_posts' );
+
+function se39294_search_pre_get_posts( $query ) {
+    if ( $query->is_main_query() && is_search() ) {
+		$query->set( 'post_type', array('san_pham','tin_tuc') );
+		$query->set( 'posts_per_page', 8);
+    }
+}
+
+// function search_by_title_only( $search, &$wp_query ) {
+//     global $wpdb;
+//     if ( empty( $search ) )
+//         return $search; // skip processing - no search term in query
+//     $q = $wp_query->query_vars;
+//     $n = ! empty( $q['exact'] ) ? '' : '%';
+//     $search =
+//     $searchand = '';
+//     foreach ( (array) $q['search_terms'] as $term ) {
+//         $term = esc_sql( like_escape( $term ) );
+//         $search .= "{$searchand}($wpdb->posts.post_title LIKE '{$n}{$term}{$n}')";
+//         $searchand = ' AND ';
+//     }
+//     if ( ! empty( $search ) ) {
+//         $search = " AND ({$search}) ";
+//         if ( ! is_user_logged_in() )
+//             $search .= " AND ($wpdb->posts.post_password = '') ";
+//     }
+//     return $search;
+// }
+// add_filter( 'posts_search', 'search_by_title_only' );
 /**
  * Twenty Seventeen functions and definitions
  *

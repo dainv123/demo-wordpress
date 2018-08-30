@@ -23,7 +23,7 @@
 			<div class="col-xs-12 col-sm-6 col-md-7">
 				<ul class="list-inline pull-right top-links">
 					<li>
-						<a href="#">Login</a>
+						<a href="/admin">Login</a>
 					</li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English

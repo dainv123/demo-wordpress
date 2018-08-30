@@ -11,24 +11,44 @@
  */
 
 get_header(); ?>
+<section id="page-title" class="page-title">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-6">
+				<h1>Error Page</h1>
+			</div>
+			<!-- .col-md-6 end -->
+			<div class="col-xs-12 col-sm-12 col-md-6">
+				<ol class="breadcrumb text-right">
+					<li>
+						<a href="index.html">Home</a>
+					</li>
+					<li class="active">404</li>
+				</ol>
+			</div>
+			<!-- .col-md-6 end -->
+		</div>
+		<!-- .row end -->
+	</div>
+	<!-- .container end -->
+</section>
+<!-- #page-title end -->
 
-<div class="wrap">
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-
-			<section class="error-404 not-found">
-				<header class="page-header">
-					<h1 class="page-title"><?php _e( 'Oops! That page can&rsquo;t be found.', 'twentyseventeen' ); ?></h1>
-				</header><!-- .page-header -->
-				<div class="page-content">
-					<p><?php _e( 'It looks like nothing was found at this location. Maybe try a search?', 'twentyseventeen' ); ?></p>
-
-					<?php get_search_form(); ?>
-
-				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
-		</main><!-- #main -->
-	</div><!-- #primary -->
-</div><!-- .wrap -->
-
+<!--404
+=============================================-->
+<section id="404" class="page-404 text-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+				<h3>404</h3>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+				<p>Car Shop is a business theme. Perfectly suited for Auto Mechanic, Car Repair Shops, Car Wash, Garages, Automobile Mechanicals, Mechanic Workshops, Auto Painting, Auto Centres.</p>
+				<a class="btn btn-primary" href="/">Back To Homepage</a>
+			</div>
+		</div>
+		<!-- .row end -->
+	</div>
+	<!-- .cotainer end -->
+</section>
 <?php get_footer();

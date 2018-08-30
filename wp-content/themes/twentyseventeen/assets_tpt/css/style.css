@@ -6036,6 +6036,7 @@ td.cart-product-quantity {
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 20px;
+	min-height: 16px;
 }
 
 .widget-recent-products .discount {
@@ -6628,4 +6629,39 @@ footer {
 }
 .wpcf7 form {
 	margin-bottom: 0;
+}
+
+/* custom css */
+nav.navigation.pagination .nav-links{
+	margin: 20px auto 0 auto;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    text-align: center;
+    float: left;
+}
+nav.navigation.pagination .page-numbers {
+    margin-right: 5px;
+    display: inline-block;
+    background: #f6f6f6;
+    float: left;
+    border-radius: 2px;
+    background-color: #f6f6f6;
+    color: #666666;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 41px;
+    border-color: transparent;
+    text-transform: capitalize;
+    width: 41px;
+    height: 41px;
+    padding: 0;
+    border: none;
+}
+nav.navigation.pagination .page-numbers.current, 
+nav.navigation.pagination a.page-numbers:hover{
+    background-color: #d22e2e !important;
+    color: #ffffff;
+    border-color: transparent;
 }

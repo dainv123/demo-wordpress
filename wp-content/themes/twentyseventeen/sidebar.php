@@ -11,7 +11,7 @@
  */
 
 // Sidebar page Sản Phẩm
-get_template_part( 'template-parts/sidebar/sidebar', $post->post_name );
+get_template_part( 'template-parts/sidebar/sidebar', 'san-pham' );
 ?>
 
 

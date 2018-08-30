@@ -38,21 +38,25 @@
                         </div>
                         <!-- .product-num end -->
                         <div class="product-options pull-right text-right pull-none-xs">
+                        <?php
+                            $search = array($_SERVER['QUERY_STRING'], '?');
+                            $replace = array('', '');
+                            $currentUrl = str_replace($search,$replace, $_SERVER['REQUEST_URI']);
+                            // var_dump($_GET);
+                            // echo $_GET['order']
+                        ?>
                             <i class="fa fa-angle-down"></i>
-                            <select>
-                                <option selected="" value="Default">Default Sorting</option>
-                                <option value="Larger">Newest Items</option>
-                                <option value="Larger">oldest Items</option>
-                                <option value="Larger">Hot Items</option>
-                                <option value="Small">Highest Price</option>
-                                <option value="Medium">Lowest Price</option>
+                            <select onchange="window.location = $(this).val();">
+                                <option value="<?= $currentUrl; ?>">Sắp xếp</option>
+                                <option value="<?= $currentUrl; ?>?orderby=title&order=asc">Tiêu đề A - Z</option>
+                                <option value="<?= $currentUrl; ?>?orderby=title&order=desc">Tiêu đề Z - A</option>
                             </select>
                         </div>
                         <!-- .product-options end -->
                     </div>
                     <!-- .col-md-12 end -->
                 </div>
-                <?php pagination_ajax() ?>
+                <?php pagination_san_pham(); ?>
             </div>
             <!-- .col-md-9 end -->
             <?php get_sidebar(); ?>

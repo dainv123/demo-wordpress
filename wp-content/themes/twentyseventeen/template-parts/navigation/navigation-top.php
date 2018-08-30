@@ -39,7 +39,7 @@
 					<span class="title">search</span>
 				</div>
 				<div class="search-box">
-					<form class="search-form">
+					<!-- <form class="search-form">
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="Type Your Search Words">
 							<span class="input-group-btn">
@@ -48,8 +48,8 @@
 								</button>
 							</span>
 						</div>
-						<!-- /input-group -->
-					</form>
+					</form> -->
+					<?php get_search_form(); ?>
 				</div>
 			</div>
 			<!-- .module-search-->
