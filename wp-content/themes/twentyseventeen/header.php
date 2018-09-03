@@ -23,9 +23,10 @@
 	rel='stylesheet' type='text/css'>
 <link href="<?php echo get_template_directory_uri(); ?>/assets_tpt/css/external.css" rel="stylesheet">
 <link href="<?php echo get_template_directory_uri(); ?>/assets_tpt/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets_tpt/css/share.min.css">
 <link href="<?php echo get_template_directory_uri(); ?>/assets_tpt/css/style.css" rel="stylesheet">
-<link href="<?php echo get_template_directory_uri(); ?>/assets_tpt/css/custom.css" rel="stylesheet">
-<title>Autoshop | E-commerce Html5 Template</title>
+<!-- <link href="<?php echo get_template_directory_uri(); ?>/assets_tpt/css/custom.css" rel="stylesheet"> -->
+<title><?php echo bloginfo() ?> | <?php the_title() ?></title>
 
 </head>
 

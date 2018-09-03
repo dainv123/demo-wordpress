@@ -19,8 +19,8 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="logo" href="index.html">
-				<img src="<?php echo get_template_directory_uri(); ?>/assets_tpt/images/logo/logo-light.png" alt="Autoshop">
+			<a class="logo" href="<?php echo get_home_url(); ?>">
+				<img src="<?php echo get_field('logo', 'option')['url'] ?>" alt="<?php echo bloginfo() ?>">
 			</a>
 		</div>
 		<div class="collapse navbar-collapse pull-right" id="header-navbar-collapse-1">

@@ -107,12 +107,13 @@
 				<!-- .product-action end -->
 				<hr class="mt-30 mb-30">
 				<div class="product-share  text-center-xs">
-					<h5 class="share-title">share product: </h5>
-					<a class="share-facebook" href="#"><i class="fa fa-facebook"></i></a>
-					<a class="share-twitter" href="#"><i class="fa fa-twitter"></i></a>
-					<a class="share-google-plus" href="#"><i class="fa fa-google-plus"></i></a>
-					<a class="share-pinterest" href="#"><i class="fa fa-pinterest"></i></a>
-					<a class="share-dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+					<h5 class="share-title">Chia sẽ: </h5>
+					<div class="social-share" data-initialized="true">
+						<a href="#" class="social-share-icon share-facebook icon-facebook"></a>
+						<a href="#" class="social-share-icon share-twitter icon-twitter"></a>
+						<a href="#" class="social-share-icon share-google-plus icon-google"></a>	
+						<a href="#" class="social-share-icon share-linkedin icon-linkedin"></a>
+					</div>
 				</div>
 				<!-- .product-share end -->
 			</div>

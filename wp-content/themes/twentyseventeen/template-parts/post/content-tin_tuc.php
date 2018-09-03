@@ -20,10 +20,10 @@
 			<!-- .col-md-6 end -->
 			<div class="col-xs-12 col-sm-12 col-md-6">
 				<ol class="breadcrumb text-right">
-					<li>
+					<!-- <li>
 						<a href="index.html">Home</a>
 					</li>
-					<li class="active">blog</li>
+					<li class="active">blog</li> -->
 				</ol>
 			</div>
 			<!-- .col-md-6 end -->
@@ -87,16 +87,12 @@
 								<h6>share this article: </h6>
 							</div>
 							<div class="share-links text-right">
-								<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-									<a class="a2a_button_facebook share-facebook"><i class="fa fa-facebook"></i></a>
-									<a class="a2a_button_twitter share-twitter"><i class="fa fa-twitter"></i></a>
-									<a class="a2a_button_google_plus share-google-plus"><i class="fa fa-google-plus"></i></a>
-									<a class="a2a_button_pinterest share-pinterest"><i class="fa fa-pinterest"></i></a>
-									<a class="a2a_button_dribbble share-dribbble"><i class="fa fa-dribbble"></i></a>
-									<a class="a2a_button_linkedin share-linkedin"><i class="fa fa-linkedin"></i></a>
+								<div class="social-share" data-initialized="true">
+									<a href="#" class="social-share-icon share-facebook icon-facebook"></a>
+									<a href="#" class="social-share-icon share-twitter icon-twitter"></a>
+									<a href="#" class="social-share-icon share-google-plus icon-google"></a>	
+									<a href="#" class="social-share-icon share-linkedin icon-linkedin"></a>
 								</div>
-								<!-- <script async src="https://static.addtoany.com/menu/page.js"></script> -->
-								<!-- AddToAny END -->
 							</div>
 						</div>
 						<!-- .entry-share end -->

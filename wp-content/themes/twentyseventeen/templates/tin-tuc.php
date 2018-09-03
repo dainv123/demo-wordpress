@@ -8,15 +8,12 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6">
-                <h1>blog grid</h1>
+                <h1><?php echo $post->post_title ?></h1>
             </div>
             <!-- .col-md-6 end -->
             <div class="col-xs-12 col-sm-12 col-md-6">
                 <ol class="breadcrumb text-right">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li class="active">blog grid</li>
+                <?php bcdonline_breadcrumbs(); ?>
                 </ol>
             </div>
             <!-- .col-md-6 end -->
@@ -79,7 +76,7 @@
         <!-- .row end -->
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12  text-center">
-                <ul class="pagination">
+                <!-- <ul class="pagination">
                     <li class="active">
                         <a href="#">1</a>
                     </li>
@@ -94,7 +91,7 @@
                         <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <!-- .col-md-12 end -->
         </div>

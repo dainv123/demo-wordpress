@@ -128,6 +128,10 @@ function replace_admin_menu_icons_css() {
 		#adminmenu #menu-posts-san_pham div.wp-menu-image::before {
 			content: '\f105';
 		}
+		#adminmenu #menu-posts.menu-icon-post, #adminmenu #menu-comments.menu-icon-comments{
+			display: none;
+		}
+
     </style>
     <?php
 }
@@ -287,6 +291,79 @@ function se39294_search_pre_get_posts( $query ) {
 		$query->set( 'post_type', array('san_pham','tin_tuc') );
 		$query->set( 'posts_per_page', 8);
     }
+}
+
+function bcdonline_breadcrumbs() {
+	$delimiter = '';
+	$name = 'Trang chủ'; //text for the 'Home' link
+	$currentBefore = '<li class="active">';
+	$currentAfter = '</li>';
+	// echo '<span class="tip">.:BCDOnline:</span>';
+  
+	global $post;
+	$home = get_bloginfo('url');
+	
+	if(is_home() && get_query_var('paged') == 0) 
+		echo '<li class="home">' . $name . '</li>';
+	else
+		echo '<a class="home" href="' . $home . '">' . $name . '</a> '. $delimiter . ' / ';
+  
+	if ( is_category() ) {
+		global $wp_query;
+		$cat_obj = $wp_query->get_queried_object();
+		$thisCat = $cat_obj->term_id;
+		$thisCat = get_category($thisCat);
+		$parentCat = get_category($thisCat->parent);
+		if ($thisCat->parent != 0) echo(get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' '));
+		echo $currentBefore;
+		single_cat_title();
+		echo $currentAfter;
+  
+	} elseif ( is_single() ) {
+	  $cat = get_the_category(); $cat = $cat[0];
+	  echo get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
+	  echo $currentBefore;
+	  the_title();
+	  echo $currentAfter;
+  
+	} elseif ( is_page() && !$post->post_parent ) {
+	  echo $currentBefore;
+	  the_title();
+	  echo $currentAfter;
+  
+	} elseif ( is_page() && $post->post_parent ) {
+	  $parent_id  = $post->post_parent;
+	  $breadcrumbs = array();
+	  while ($parent_id) {
+		$page = get_page($parent_id);
+		$breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
+		$parent_id  = $page->post_parent;
+	  }
+	  $breadcrumbs = array_reverse($breadcrumbs);
+	  foreach ($breadcrumbs as $crumb) echo $crumb . ' ' . $delimiter . ' ';
+	  echo $currentBefore;
+	  the_title();
+	  echo $currentAfter;
+  
+	} elseif ( is_search() ) {
+	  echo $currentBefore . 'Search for ' . get_search_query() . $currentAfter;
+  
+	} elseif ( is_tag() ) {
+	  echo $currentBefore;
+	  single_tag_title();
+	  echo $currentAfter;
+  
+	} elseif ( is_author() ) {
+	   global $author;
+	  $userdata = get_userdata($author);
+	  echo $currentBefore. $userdata->display_name . $currentAfter;
+  
+	} elseif ( is_404() ) {
+	  echo $currentBefore . 'Error 404' . $currentAfter;
+	}
+  
+	if ( get_query_var('paged') )
+	  echo $currentBefore . __('Page') . ' ' . get_query_var('paged') . $currentAfter;
 }
 
 // function search_by_title_only( $search, &$wp_query ) {

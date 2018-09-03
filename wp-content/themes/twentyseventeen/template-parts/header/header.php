@@ -15,9 +15,9 @@
 			<div class="col-xs-12 col-sm-6 col-md-5">
 				<ul class="list-inline top-contact">
 					<li>
-						<span>Phone :</span> + 2 0106 5370701</li>
+						<span>Phone :</span> <?php the_field('so_dien_thoai_ban', 'option'); ?></li>
 					<li>
-						<span>Email :</span> 7oroof@7oroof.com</li>
+						<span>Email :</span> <?php the_field('email', 'option'); ?></li>
 				</ul>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-7">
@@ -26,15 +26,15 @@
 						<a href="/admin">Login</a>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">English
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">T.Việt
 							<i class="fa fa-angle-down"></i>
 						</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="#">Arabic</a>
+								<a href="#">T.Việt</a>
 							</li>
 							<li>
-								<a href="#">German</a>
+								<a href="#">English</a>
 							</li>
 						</ul>
 					</li>

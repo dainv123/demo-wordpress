@@ -5194,6 +5194,10 @@ td.cart-product-quantity {
 	background-color: #EA4C89;
 }
 
+.product-share a.share-linkedin{
+background-color: #0077B5;
+}
+
 .shop-single .product-share a:hover {
 	background-color: #1b1a1a;
 }
